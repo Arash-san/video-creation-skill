@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Creation"
+  short_description: "Narrated, animated explainer videos with a fresh art direction each time."
+  default_prompt: "Use the Video Creation skill to research the material, roll and record a new art direction with style_roll.py, write narration.json, synthesize the voice and timeline, build style.js and scenes.js on the canvas engine, check contact sheets and the layout check, then render and assemble a 1080p MP4 with burned-in subtitles."

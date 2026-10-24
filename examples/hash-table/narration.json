@@ -1,0 +1,30 @@
+{
+  "voice": "en-US-AvaMultilingualNeural",
+  "rate": "+4%",
+  "fps": 30,
+  "subtitles": {"font": "Space Grotesk", "size": 46, "text": "#F3EEE3", "box": "#24366E", "box_alpha": 0.86, "max_chars": 54, "bold": true},
+  "scenes": [
+    {"id": "title", "lines": [
+      {"text": "How does a program find one item among millions, almost instantly? In most languages, the answer is a hash table.", "pause": 0.3}
+    ]},
+    {"id": "scan", "lines": [
+      "The slow way is to check items one by one.",
+      "With a million names in a list, an unlucky search looks at every single one."
+    ]},
+    {"id": "hash", "lines": [
+      "A hash table is smarter. It feeds the key, say the word cat, through a hash function, which turns it into a number.",
+      "That number picks a bucket, and the value goes straight there."
+    ]},
+    {"id": "lookup", "lines": [
+      "To find cat later, the program hashes it again, gets the same number, and jumps to the same bucket.",
+      "One step, no matter how big the table grows."
+    ], "min_dur": 13},
+    {"id": "collide", "lines": [
+      "Sometimes two keys land in the same bucket. That is called a collision.",
+      "The usual fix is to keep a short list in each bucket, and to grow the table before those lists get long."
+    ]},
+    {"id": "outro", "lines": [
+      "So a hash table trades a little memory for a lot of speed. It computes where an item lives, instead of searching for it."
+    ], "min_dur": 10}
+  ]
+}

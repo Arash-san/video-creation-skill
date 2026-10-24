@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+# generated per project
+**/audio/
+**/chunks/
+**/stills/
+**/deliverables/
+**/fonts/
+**/joined.mp4
+**/narration.wav
+**/tl.js
+**/timeline.json
+**/subs.ass
+.tmp*

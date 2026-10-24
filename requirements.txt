@@ -1,0 +1,5 @@
+edge-tts>=6.1
+numpy
+pillow
+playwright
+fonttools

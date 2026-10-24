@@ -1,0 +1,12 @@
+{
+  "voice": "en-US-AvaMultilingualNeural",
+  "rate": "+4%",
+  "fps": 30,
+  "subtitles": {"font": "Arial", "size": 42, "text": "#F4EEE4", "box": "#1E1A16", "box_alpha": 0.8, "max_chars": 54},
+  "scenes": [
+    {"id": "title", "lines": [
+      "One spoken sentence per line. Each line becomes one audio clip and one or more subtitle cues.",
+      {"text": "A line can also carry a pause after it, in seconds.", "pause": 0.6}
+    ]}
+  ]
+}
