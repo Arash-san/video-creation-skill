@@ -1,6 +1,5 @@
 {
-  "voice": "en-US-AvaMultilingualNeural",
-  "rate": "+4%",
+  "tts": {"engine": "auto", "design": "A friendly zine maker explaining her favourite trick: a woman in her late twenties, American accent, bright and conversational, clear diction, quick but never rushed, a little playful."},
   "fps": 30,
   "subtitles": {"font": "Space Grotesk", "size": 46, "text": "#F3EEE3", "box": "#24366E", "box_alpha": 0.86, "max_chars": 54, "bold": true},
   "scenes": [

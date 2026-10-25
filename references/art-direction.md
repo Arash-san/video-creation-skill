@@ -10,7 +10,7 @@ Most generated videos look the same: a dark navy or black background, rounded tr
 
 1. **Start from the subject, not from a style.** Ask what the topic physically is or feels like. Light through fiber suggests sun prints and glowing threads. Bio-inspired sensors suggest a naturalist's atlas. Hash tables (sorting things into slots) suggest a printed zine with bins. Networking suggests a transit map. History suggests a newspaper. Write three or four associations.
 
-2. **Roll candidates.** `python scripts/style_roll.py --n 4` prints combinations of medium, transition, camera, through-line, energy and layout from `style_axes.json`, skipping media used before (log in `~/.video-creation/styles.jsonl`). The last candidate is always a hybrid of two media, which often produces the most original looks (for example "Transit map x Risograph").
+2. **Roll candidates.** `python scripts/style_roll.py --n 4` prints combinations of medium, transition, camera, through-line, energy, layout and narrator voice from `style_axes.json`, skipping media used before (log in `~/.video-creation/styles.jsonl`). The last candidate is always a hybrid of two media, which often produces the most original looks (for example "Transit map x Risograph").
 
 3. **Choose and bend.** Pick the candidate that best matches your associations, or combine one with your own idea. Then adapt:
    - **Palette:** keep 1 background, 1 ink, 2 or 3 accents at most. Give every accent a meaning (for example pink = the thing we are looking for, yellow = what to remember) and never use it for anything else.
@@ -18,6 +18,7 @@ Most generated videos look the same: a dark navy or black background, rounded tr
    - **Texture:** paper, grain, scanlines, halftone, glass, felt or none. Build it once in `prep()` and draw it in `overlay()`.
    - **Motif / through-line:** the device that connects scenes (a thread of light, numbered plates, a route map, a running counter). It is what makes ten scenes feel like one film.
    - **Camera:** fixed plates, one continuous world with a flying camera (`withCam`, `camAt`), scrolling, orbiting, or diving into details.
+   - **Voice:** cast the narrator to fit the world, the way you chose the palette. A cyanotype light lab might get a calm planetarium guide; a risograph zine a quick, friendly podcast voice; a naturalist's atlas an unhurried documentary narrator. With Ming installed, write it as a `"design"` description in `narration.json` (each candidate from `style_roll.py` suggests one). Vary gender, age, accent and pace between videos as deliberately as the visuals. See [narration.md](narration.md#the-voice).
    - **Transition:** pick one family and use it consistently: built-ins are `cut`, `fade`, `iris`, `wipe`, `sheet`, `zoom`, or write your own `(prev, next, u, i)` function in `style.js` that fits the world (an ink drop that spreads, a page that turns, a CRT that collapses to a dot).
 
 4. **Make a style test before the scenes.** Draw the title scene and one dense scene, render two stills, and ask: *Would this look generic next to a template video? Could someone name the style in three words?* If not, push harder: bigger type, bolder texture, a stranger camera, a stronger motif.

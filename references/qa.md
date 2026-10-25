@@ -29,6 +29,12 @@ Run through this with contact sheets (`render.py PROJ sheets`) and full-size sti
 - [ ] Names, titles and attributions are correct.
 - [ ] Caveats are present where the evidence is limited.
 
+## Voice
+
+- [ ] `tts.py` reports that the listening check passed (`audio/voice_report.json`). For a line that still fails, rephrase it (spell out an awkward name, split a long sentence) and rerun.
+- [ ] The voice anchor (`audio/voice_anchor.wav`) fits the art direction. If you can play audio, listen to it and to one full line; otherwise check its length and that the report shows high voice similarity on every line.
+- [ ] Inline sound tags such as `[Laughter]` are rare and placed where a person would really make that sound.
+
 ## Output
 
 - [ ] Extract two or three frames from the final MP4: subtitles use the intended font (not Arial), sit in the band, and do not cover content.

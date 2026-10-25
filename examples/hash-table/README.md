@@ -1,6 +1,6 @@
 # Demo: hash tables in a risograph zine style
 
-A complete 72-second project made with this skill. Preview: [../../assets/demo_hash_table_720p.mp4](../../assets/demo_hash_table_720p.mp4)
+A complete 65-second project made with this skill, narrated by a Ming-3.0-tts voice designed to fit the zine (see the `tts` block in `narration.json`). Preview: [../../assets/demo_hash_table_720p.mp4](../../assets/demo_hash_table_720p.mp4)
 
 Rebuild it from this folder's parent (the skill root):
 

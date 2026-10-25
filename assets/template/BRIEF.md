@@ -13,6 +13,7 @@ Length: <target minutes>  Sources: <papers, docs, data; every number on screen m
 - Camera: <fixed plates / one world / scroll ...>
 - Transition: <name and how it fits the world>
 - Energy: <calm, brisk, playful, precise, warm>
+- Voice: <who narrates: gender, age, accent, timbre, pace, attitude; this becomes tts.design>
 - Not allowed: dark rounded cards, pill labels, bullet lists fading in, stock gradients, emoji, mascots unless asked
 
 ## Scene plan

@@ -1,5 +1,5 @@
 {
-  "_about": "Raw material for inventing an art direction. style_roll.py combines one entry from each axis. Treat every entry as a starting point to bend toward the topic, never as a finished template. Fonts are Google Fonts (fetch_fonts.py).",
+  "_about": "Raw material for inventing an art direction. style_roll.py combines one entry from each axis. Treat every entry as a starting point to bend toward the topic, never as a finished template. Fonts are Google Fonts (fetch_fonts.py). 'voices' are narrator descriptions for Ming voice design (tts.design in narration.json).",
   "media": [
     {"name": "Cyanotype light lab", "world": "Prussian blue sun-print paper; everything drawn in pale cream line art; light itself is a warm glowing thread.",
      "palette": ["#0F335F", "#0A2445", "#F3ECDC", "#9CC6EA", "#FFB547", "#FF6B57"], "texture": "fibre grain, slight blotchy exposure",
@@ -147,5 +147,19 @@
     "margin-note layout: main figure plus annotated margin",
     "full-bleed illustration with small type in a corner block",
     "diagonal composition with movement left to right"
+  ],
+  "voices": [
+    "An unhurried museum docent: a woman in her sixties, low and warm, clear diction, gentle pauses before each new idea.",
+    "A bright science-radio host: a man in his thirties, quick and friendly, smiling delivery, crisp consonants.",
+    "A dry, precise lab lead: a woman in her forties, even pace, matter-of-fact, a hint of humour on the punchlines.",
+    "A late-night radio storyteller: a man in his fifties, deep and soft, close to the microphone, slow and intimate.",
+    "A field naturalist whispering in a hide: a woman in her thirties, hushed, curious, a little breathy, slow.",
+    "A newsreel announcer: a man in his forties, confident, projected, brisk rhythm, crisp emphasis on key numbers.",
+    "A patient workshop teacher: a man in his sixties, kind and grounded, medium pace, explains like he is at the bench.",
+    "A young podcast explainer: a woman in her twenties, conversational and energetic, natural rises, never shouty.",
+    "A calm planetarium guide: a woman in her forties, soft, spacious and wondering, long vowels, slow pace.",
+    "A train-station announcer turned narrator: a man in his thirties, clear and measured, neutral accent, steady rhythm.",
+    "A British documentary narrator: a man in his seventies, warm gravel, unhurried, dry wit.",
+    "A cheerful kitchen-show host: a woman in her thirties, bright and lively, quick pace, warm laugh in the voice."
   ]
 }

@@ -1,6 +1,5 @@
 {
-  "voice": "en-US-AvaMultilingualNeural",
-  "rate": "+4%",
+  "tts": {"engine": "auto", "design": "Replace with the narrator from your art direction: who they are (gender, age, accent), timbre, pace and attitude."},
   "fps": 30,
   "subtitles": {"font": "Arial", "size": 42, "text": "#F4EEE4", "box": "#1E1A16", "box_alpha": 0.8, "max_chars": 54},
   "scenes": [

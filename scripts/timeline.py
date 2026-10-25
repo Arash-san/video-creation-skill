@@ -25,6 +25,7 @@ from pathlib import Path
 import numpy as np
 
 SR = 48000
+TAG = re.compile(r"\s*\[[A-Za-z][A-Za-z-]*\]")  # Ming's inline sound tags ([Laughter], [Sigh]) are not subtitled
 
 
 def ass_color(hexc, alpha=1.0):
@@ -123,6 +124,8 @@ def main(project):
     cfg = json.loads((project / "narration.json").read_text(encoding="utf-8"))
     A = project / "audio"
     durs = json.loads((A / "durations.json").read_text())
+    fj = A / "files.json"
+    files = json.loads(fj.read_text()) if fj.exists() else {k: f"{k}.mp3" for k in durs}
     tm = {"lead_first": 1.6, "lead": 1.9, "line_gap": 0.45, "tail": 0.7, **cfg.get("timing", {})}
     st = {"font": "Work Sans", "size": 42, "text": "#F4EEE4", "box": "#1E1A16", "box_alpha": 0.8,
           "max_chars": 54, "margin_v": 34, "bold": False, **cfg.get("subtitles", {})}
@@ -149,7 +152,7 @@ def main(project):
 
     buf = np.zeros(int((total + 1) * SR), dtype=np.float32)
     for t0, key, _ in placed:
-        x = pcm(A / f"{key}.mp3")
+        x = pcm(A / files[key])
         i = int(t0 * SR)
         buf[i:i + len(x)] += x
     buf = np.clip(buf, -32767, 32767).astype(np.int16)
@@ -162,7 +165,7 @@ def main(project):
     events = []
     for t0, key, text in placed:
         words = json.loads((A / f"{key}.words.json").read_text())
-        for a, b, txt in cues(text, words, st["max_chars"]):
+        for a, b, txt in cues(TAG.sub("", text), words, st["max_chars"]):
             events.append([t0 + a, t0 + b, txt])
     for i, e in enumerate(events):  # hold each cue a little, never into the next one
         nxt = events[i + 1][0] if i + 1 < len(events) else e[1] + 1

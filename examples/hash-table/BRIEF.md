@@ -14,6 +14,7 @@ Length: about 70 seconds. Sources: standard data-structures material; the hash v
 - Motif / through-line: the row of buckets, which persists from scene 3 to scene 5 and changes size.
 - Camera: fixed plates. Transition: "sheet", the next page slides in over the last with a contact shadow.
 - Energy: brisk and playful (bounces, a stamp, a seesaw) but readable.
+- Voice: a friendly zine maker, a woman in her late twenties, bright and conversational, quick but never rushed.
 
 ## Scene plan
 | id | narration idea | visual argument |

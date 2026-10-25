@@ -4,8 +4,8 @@
     python style_roll.py --record "Risograph zine" --title "Hash tables" [--log PATH]
     python style_roll.py --history [--log PATH]
 
-Each candidate combines a medium, a transition, a camera, a through-line, an energy and a layout
-from references/style_axes.json. One candidate is always a hybrid of two media, which is often
+Each candidate combines a medium, a transition, a camera, a through-line, an energy, a layout and a
+narrator voice from references/style_axes.json. One candidate is always a hybrid of two media, which is often
 where the most original looks come from. Media already in the log are skipped.
 The log defaults to ~/.video-creation/styles.jsonl (override with --log or VIDEO_STYLE_LOG).
 """
@@ -77,7 +77,8 @@ def main():
         print(f"   camera:     {rnd.choice(ax['camera'])}")
         print(f"   through:    {rnd.choice(ax['through_lines'])}")
         print(f"   energy:     {rnd.choice(ax['energy'])}")
-        print(f"   layout:     {rnd.choice(ax['layout'])}\n")
+        print(f"   layout:     {rnd.choice(ax['layout'])}")
+        print(f"   voice:      {rnd.choice(ax['voices'])}\n")
     print("After choosing, record it:  python style_roll.py --record \"<name>\" --title \"<video>\" --notes \"<palette, type, motif>\"")
 
 

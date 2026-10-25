@@ -14,7 +14,8 @@ The most important rule: **every video must look like nobody has made it before.
 - Python 3.10+ with `pip install -r requirements.txt` (edge-tts, numpy, pillow, playwright, fonttools)
 - `python -m playwright install chromium`
 - `ffmpeg` and `ffprobe` on PATH, built with libass (most builds are)
-- Internet access for the voice (edge-tts) and fonts (Google Fonts via GitHub)
+- Internet access for fonts (Google Fonts via GitHub)
+- Voice, recommended: an NVIDIA GPU with about 4 GB free for [Ming-3.0-tts](https://huggingface.co/inclusionAI/Ming-3.0-tts-0.5B), an open-weight speech model that runs locally. Install it once with `python scripts/setup_ming.py`. Without it, `tts.py` falls back to Microsoft Edge voices (edge-tts, needs internet).
 
 All commands below run from this skill folder; `PROJ` is the project folder you create.
 
@@ -26,14 +27,15 @@ All commands below run from this skill folder; `PROJ` is the project folder you 
    `python scripts/new_project.py PROJ`
    This copies the engine (`core.js`, `main.js`, `index.html`) and stubs (`style.js`, `scenes.js`, `narration.json`, `BRIEF.md`).
 
-3. **Invent the art direction.** Run `python scripts/style_roll.py` to get four candidate directions combined from a large catalog (media, transitions, camera, through-lines, energy, layout). Styles you used before are skipped automatically. Pick the one that fits the topic best, then push it further: change the palette to suit the subject, choose a motif that carries the argument, and decide how scenes connect. You may also invent something outside the catalog entirely. Fill in the art direction section of `PROJ/BRIEF.md`, then record the choice:
+3. **Invent the art direction.** Run `python scripts/style_roll.py` to get four candidate directions combined from a large catalog (media, transitions, camera, through-lines, energy, layout). Styles you used before are skipped automatically. Pick the one that fits the topic best, then push it further: change the palette to suit the subject, choose a motif that carries the argument, and decide how scenes connect. You may also invent something outside the catalog entirely. Cast the narrator too: each candidate suggests a voice, and the voice should fit the world as much as the palette does. Fill in the art direction section of `PROJ/BRIEF.md`, then record the choice:
    `python scripts/style_roll.py --record "<style name>" --title "<video>" --notes "<palette, type, motif>"`
 
-4. **Write the narration** in `PROJ/narration.json`: scenes, each with a list of spoken lines. Follow [references/narration.md](references/narration.md). Plan each scene's visual argument next to its lines in `BRIEF.md` (what animates while each sentence is spoken).
+4. **Write the narration** in `PROJ/narration.json`: scenes, each with a list of spoken lines, and the voice in the `"tts"` block (a `"design"` description of the narrator, a built-in voice, or a clone). Follow [references/narration.md](references/narration.md). Plan each scene's visual argument next to its lines in `BRIEF.md` (what animates while each sentence is spoken).
 
 5. **Synthesize the voice and timeline.**
    `python scripts/tts.py PROJ` then `python scripts/timeline.py PROJ`
    This writes the audio, `timeline.json` (when each scene and line starts), `narration.wav` and `subs.ass`. Only changed lines are re-synthesized, so rerun both after any text edit.
+   With Ming, the voice is fixed first in `audio/voice_anchor.wav`, then every line is generated, aligned word by word to your text, and checked automatically: lines whose words do not match the script, or whose voice drifts from the anchor, are regenerated. `tts.py` ends by saying whether every line passed; rephrase any line it still flags. Ming runs slower than real time (about 1.5 minutes per minute of speech with the default 3 workers), so write and review the narration before synthesizing all of it.
 
 6. **Fetch fonts** for your direction: `python scripts/fetch_fonts.py PROJ "Display Family" "Text Family" "Mono Family"`, then paste the printed `@font-face` lines into `PROJ/index.html`. Set the subtitle font in `narration.json` to one of these families.
 
@@ -61,7 +63,8 @@ All commands below run from this skill folder; `PROJ` is the project folder you 
 - **Frames are pure functions of time.** No state carried between frames, no `Math.random()` (use `rng(seed)`), no `Date.now()`. Chunks render in separate browsers and out of order.
 - **Keep content above the subtitle band** (`SAFE_BOTTOM`, y = 900 by default) and inside a 24 px margin.
 - **Accuracy over flourish.** Every number, label and claim on screen must come from the sources. Say "illustrative" on screen when a chart is a sketch rather than data.
-- **No mascots, music or sound effects** unless the user asks for them. Default voice is a natural female neural voice (`en-US-AvaMultilingualNeural`); change it in `narration.json` if the user prefers.
+- **A voice cast for this video.** Do not reuse the same narrator by habit; vary gender, age, accent and pace with the art direction, unless the user asks for a specific voice. Never clone a real person's voice without their permission.
+- **No mascots, music or sound effects** unless the user asks for them. Ming's inline sounds (`[Laughter]`, `[Sigh]`) are allowed sparingly where a person would really make them.
 
 ## Optional: generated illustrations
 
@@ -72,6 +75,9 @@ When a style needs rich illustration (engraved plates, painted scenes, objects),
 - **Subtitle font falls back to Arial:** libass cannot use variable fonts. `fetch_fonts.py` writes static copies to `fonts/subs/` and `assemble.py` uses them. Static instances often run smaller than the variable font did, so check the size on a real frame.
 - **"Tainted canvas" / `toDataURL` SecurityError:** images loaded from `file://` need the Chromium flags in `render.py` and `crossOrigin = 'anonymous'` (already in `loadArt`).
 - **Fonts silently missing in frames:** `boot()` loads every weight before setting `READY`; a family name that does not match the `@font-face` name falls back to a system font. Compare a still against the intended face.
+- **Ming "no kernel image is available for execution on the device":** the PyTorch build does not support the GPU. `setup_ming.py` installs PyTorch 2.7.1 with CUDA 12.8 (RTX 20 to 50 series, driver 570+); use `--cuda cu124` only for older drivers on pre-RTX 50 cards.
+- **Ming picks a busy GPU or runs out of memory:** `tts.py` uses the GPUs with the most free memory, about 3 GB per worker. Set `CUDA_VISIBLE_DEVICES` to choose one, or lower `"workers"` in the `tts` block.
+- **Numbers in word timings:** the aligner was trained without digits, so a spoken number gets its timing from the words around it and is skipped by the listening check. Write numbers the way they should be said when the exact moment matters.
 - **edge-tts "No audio was received":** transient; `tts.py` retries. If one line keeps failing, rephrase odd characters.
 - **Slow renders:** each worker runs its own Chromium. Heavy per-frame work (big textures, thousands of dots) belongs in `prep()` or a cached canvas. Workers default to half the CPU cores.
 - **Huge files:** grain and noise textures make video bitrates large. `assemble.py --split-mb` applies a light denoise before encoding the parts.
